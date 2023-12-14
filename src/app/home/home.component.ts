@@ -1,15 +1,20 @@
-import { Component } from '@angular/core';
-import { ClolthesService } from '../services/clolthes.service';
+import { Component, OnInit } from '@angular/core';
+import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  providers: [ClolthesService],
+  providers: [],
 })
-export class HomeComponent {
-  clothes: string[];
-  constructor(private _clothes: ClolthesService) {
-    this.clothes = _clothes.clothes;
+export class HomeComponent implements OnInit {
+  products: any[] = [];
+  constructor(private productsService: ProductsService) {}
+  ngOnInit(): void {
+    this.productsService.getProducts().subscribe({
+      next: (res) => {
+        this.products = res.data;
+      },
+    });
   }
 }

@@ -1,1 +1,112 @@
-<p>register works!</p>
+<div>
+  <h1 class="my-3 mx-5">Register Now:</h1>
+  <div class="container">
+    <form
+      [formGroup]="registerForm"
+      (submit)="handleRegistration(registerForm)"
+    >
+      <label for="name" class="my-2">Name:</label>
+      <input
+        class="form-control my-2"
+        type="text"
+        id="name"
+        formControlName="name"
+      />
+      <p
+        *ngIf="registerForm.controls['name'].errors?.['required'] && registerForm.controls['name'].touched"
+        class="text-danger"
+      >
+        Name is required!
+      </p>
+      <p
+        *ngIf="registerForm.controls['name'].errors?.['minlength'] && registerForm.controls['name'].touched"
+        class="text-danger"
+      >
+        Name should be more than 3 character
+      </p>
+      <p
+        *ngIf="registerForm.controls['name'].errors?.['maxlength'] && registerForm.controls['name'].touched"
+        class="text-danger"
+      >
+        Name should be less than 30 character
+      </p>
+      <label for="email" class="my-2">Email:</label>
+      <input
+        class="form-control my-2"
+        type="text"
+        id="email"
+        formControlName="email"
+      />
+      <p
+        *ngIf="registerForm.controls['email'].errors?.['required'] && registerForm.controls['email'].touched"
+        class="text-danger"
+      >
+        Email is required!
+      </p>
+      <p
+        *ngIf="registerForm.controls['email'].errors?.['email'] && registerForm.controls['email'].touched"
+        class="text-danger"
+      >
+        Write a valid mail
+      </p>
+      <label for="password" class="my-2">Password:</label>
+      <input
+        class="form-control my-2"
+        type="password"
+        id="password"
+        formControlName="password"
+      />
+      <p
+        *ngIf="registerForm.controls['password'].errors?.['required'] && registerForm.controls['password'].touched"
+        class="text-danger"
+      >
+        Password is required!
+      </p>
+      <p
+        *ngIf="registerForm.controls['password'].errors?.['maxlength'] && registerForm.controls['password'].touched"
+        class="text-danger"
+      >
+        Password should be less than 30 characters
+      </p>
+      <p
+        *ngIf="registerForm.controls['password'].errors?.['minlength'] && registerForm.controls['password'].touched"
+        class="text-danger"
+      >
+        Password should be more than 8 characters
+      </p>
+      <label for="repassword" class="my-2">RePassword:</label>
+      <input
+        class="form-control my-2"
+        type="password"
+        id="repassword"
+        formControlName="passwordConfirm"
+      />
+      <p
+        *ngIf="registerForm.controls['passwordConfirm'].errors?.['required'] && registerForm.controls['passwordConfirm'].touched"
+        class="text-danger"
+      >
+        Password is required!
+      </p>
+      <p
+        *ngIf="registerForm.controls['passwordConfirm'].errors?.['maxlength'] && registerForm.controls['passwordConfirm'].touched"
+        class="text-danger"
+      >
+        Password should be less than 30 characters
+      </p>
+      <p
+        *ngIf="registerForm.controls['passwordConfirm'].errors?.['minlength'] && registerForm.controls['passwordConfirm'].touched"
+        class="text-danger"
+      >
+        Password should be more than 8 characters
+      </p>
+      <button
+        [disabled]="registerForm.invalid"
+        class="d-block ms-auto btn btn-success"
+        type="submit"
+      >
+        Register
+      </button>
+      <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+    </form>
+  </div>
+</div>

@@ -1,1 +1,60 @@
-<p>login works!</p>
+<div>
+  <h1 class="my-3 mx-5">Register Now:</h1>
+  <div class="container">
+    <form [formGroup]="loginForm" (submit)="handleLogin(loginForm)">
+      <label for="email" class="my-2">Email:</label>
+      <input
+        class="form-control my-2"
+        type="text"
+        id="email"
+        formControlName="email"
+      />
+      <p
+        *ngIf="loginForm.controls['email'].errors?.['required'] && loginForm.controls['email'].touched"
+        class="text-danger"
+      >
+        Email is required!
+      </p>
+      <p
+        *ngIf="loginForm.controls['email'].errors?.['email'] && loginForm.controls['email'].touched"
+        class="text-danger"
+      >
+        Write a valid mail
+      </p>
+      <label for="password" class="my-2">Password:</label>
+      <input
+        class="form-control my-2"
+        type="password"
+        id="password"
+        formControlName="password"
+      />
+      <p
+        *ngIf="loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched"
+        class="text-danger"
+      >
+        Password is required!
+      </p>
+      <p
+        *ngIf="loginForm.controls['password'].errors?.['maxlength'] && loginForm.controls['password'].touched"
+        class="text-danger"
+      >
+        Password should be less than 30 characters
+      </p>
+      <p
+        *ngIf="loginForm.controls['password'].errors?.['minlength'] && loginForm.controls['password'].touched"
+        class="text-danger"
+      >
+        Password should be more than 8 characters
+      </p>
+
+      <button
+        [disabled]="loginForm.invalid"
+        class="d-block ms-auto btn btn-success"
+        type="submit"
+      >
+        Login
+      </button>
+      <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+    </form>
+  </div>
+</div>
